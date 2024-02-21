@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { USER_NOT_FOUND_BY_ID } from './user.message';
+import { USER_NOT_FOUND_BY_ID } from '../user-service.message';
 
 @Injectable()
 export class UserService {
