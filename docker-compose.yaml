@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:12
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  pg-admin:
+    image: dpage/pgadmin4:6
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - "5050:5050"
+
+volumes:
+  data:
