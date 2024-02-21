@@ -1,7 +1,10 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import * as dotenv from 'dotenv';
+import { User } from "./user/entities/user.entity";
 
 dotenv.config();
+
+export const TYPEORM_FEATURE_USER = TypeOrmModule.forFeature([User]);
 
 export const TYPEORM_POSTGRES_CONFIG_USER = TypeOrmModule.forRoot({
     type: 'postgres',
@@ -10,6 +13,6 @@ export const TYPEORM_POSTGRES_CONFIG_USER = TypeOrmModule.forRoot({
     username: process.env.POSTGRES_USER || 'postgres',
     password: process.env.POSTGRES_PASSWORD || 'postgres',
     database: 'user',
-    entities: [],
+    entities: [User],
     synchronize: true,
 });
