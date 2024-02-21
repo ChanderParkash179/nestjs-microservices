@@ -1,3 +1,3 @@
-export enum Status{
-    ACTIVE, PENDING, UNACTIVE
+export enum Status {
+    ACTIVE = "ACTIVE", PENDING = "PENDING", UNACTIVE = "UNACTIVE"
 }

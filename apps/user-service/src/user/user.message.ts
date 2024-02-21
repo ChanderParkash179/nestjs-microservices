@@ -1,0 +1,1 @@
+export const USER_NOT_FOUND_BY_ID = 'No User Exists against the provided id:';

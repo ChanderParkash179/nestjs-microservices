@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Status } from "../enums/user.status";
 import { Role } from "../enums/user.role";
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class User {
@@ -17,9 +18,14 @@ export class User {
     @Column({ nullable: false })
     password: string;
 
-    @Column({ type: 'enum', enum: Status, default: Status.PENDING, nullable: false })
+    @Column({ type: 'enum', enum: Status, default: Status.PENDING })
     status: Status;
 
-    @Column({ type: 'enum', enum: Role, default: Role.NORMAL, nullable: false })
+    @Column({ type: 'enum', enum: Role, default: Role.NORMAL })
     role: Role;
+
+    @BeforeInsert()
+    async hashedPassword() {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
 }
