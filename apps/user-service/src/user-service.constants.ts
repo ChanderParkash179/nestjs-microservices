@@ -27,17 +27,6 @@ export const TYPEORM_POSTGRES_CONFIG_USER = TypeOrmModule.forRoot({
     synchronize: true,
 });
 
-export const REGISTER_PRODUCT_SERVICE = ClientsModule.register([
-    {
-        name: 'PRODUCT-SERVICE',
-        transport: Transport.TCP,
-        options: {
-            host: '127.0.0.1',
-            port: PORT_NUMBER_PRODUCT
-        }
-    }
-]);
-
 export const CLIENT_PROXY_CREATE = ClientProxyFactory.create({
     transport: Transport.TCP,
     options: {

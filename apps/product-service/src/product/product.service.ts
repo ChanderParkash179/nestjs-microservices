@@ -1,9 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
+import { NO_PRODUCT_AVAILABLE_USER } from '../product-service.message';
 
 @Injectable()
 export class ProductService {
@@ -24,5 +25,14 @@ export class ProductService {
 
     const product = this.productRepository.create(payload);
     return await this.productRepository.save(product);
+  }
+
+  async findByUserId(id: number): Promise<Product[]> {
+
+    const products = await this.productRepository.find({ where: { user: id } });
+
+    if (!products) throw new NotFoundException(`${NO_PRODUCT_AVAILABLE_USER} - ${id}`);
+
+    return products;
   }
 }

@@ -1,0 +1,1 @@
+export const NO_PRODUCT_AVAILABLE_USER = 'No Products avaialable against the provided user id:';
