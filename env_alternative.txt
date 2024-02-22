@@ -1,0 +1,13 @@
+# This is alternative file of .env - environment file added for taking reference
+
+# we know that .env is confidential file in every project
+
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+
+PGADMIN_DEFAULT_EMAIL=admin@email.com
+PGADMIN_DEFAULT_PASSWORD=admin
+
+SECRET_KEY=Wd%ADTR*3KJ&2~xt9k4!UqVy
+
+TOKEN_EXPIRY_DURATION=3600s
