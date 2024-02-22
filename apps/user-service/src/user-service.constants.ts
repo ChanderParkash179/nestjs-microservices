@@ -11,9 +11,6 @@ dotenv.config();
 export const PORT_NUMBER_USER = 3001;
 export const PORT_NUMBER_PRODUCT = 3002;
 
-export const BASE_URL_PRODUCT = `http://localhost:${PORT_NUMBER_PRODUCT}/product/`;
-export const BASE_URL_USER = `http://localhost:${PORT_NUMBER_USER}/user/`;
-
 export const TYPEORM_FEATURE_USER = TypeOrmModule.forFeature([User]);
 
 export const TYPEORM_POSTGRES_CONFIG_USER = TypeOrmModule.forRoot({
@@ -25,14 +22,6 @@ export const TYPEORM_POSTGRES_CONFIG_USER = TypeOrmModule.forRoot({
     database: 'user',
     entities: [User],
     synchronize: true,
-});
-
-export const CLIENT_PROXY_CREATE = ClientProxyFactory.create({
-    transport: Transport.TCP,
-    options: {
-        host: '127.0.0.1',
-        port: PORT_NUMBER_PRODUCT
-    }
 });
 
 export const SECRET_KEY = process.env.SECRET_KEY || "Wd%ADTR*3KJ&2~xt9k4!UqVy";

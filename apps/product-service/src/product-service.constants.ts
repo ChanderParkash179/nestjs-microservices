@@ -7,9 +7,6 @@ dotenv.config();
 export const PORT_NUMBER_USER = 3001;
 export const PORT_NUMBER_PRODUCT = 3002;
 
-export const BASE_URL_PRODUCT = `http://localhost:${PORT_NUMBER_PRODUCT}/product/`;
-export const BASE_URL_USER = `http://localhost:${PORT_NUMBER_USER}/user/`;
-
 export const TYPEORM_FEATURE_PRODUCT = TypeOrmModule.forFeature([Product]);
 
 export const TYPEORM_POSTGRES_CONFIG_PRODUCT = TypeOrmModule.forRoot({
