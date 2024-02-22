@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { USER_NOT_FOUND_BY_ID } from '../user-service.message';
+import { USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID } from '../user-service.message';
 
 @Injectable()
 export class UserService {
@@ -51,5 +51,13 @@ export class UserService {
     }
 
     return result;
+  }
+
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findOneBy({ email });
+
+    if (!user) throw new NotFoundException(`${USER_NOT_FOUND_BY_EMAIL} - ${email}`)
+
+    return user;
   }
 }

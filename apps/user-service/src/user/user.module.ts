@@ -6,6 +6,7 @@ import { REGISTER_PRODUCT_SERVICE, TYPEORM_FEATURE_USER } from '../user-service.
 @Module({
   controllers: [UserController],
   providers: [UserService],
-  imports: [TYPEORM_FEATURE_USER, REGISTER_PRODUCT_SERVICE]
+  imports: [TYPEORM_FEATURE_USER, REGISTER_PRODUCT_SERVICE],
+  exports: [UserService]
 })
 export class UserModule { }
