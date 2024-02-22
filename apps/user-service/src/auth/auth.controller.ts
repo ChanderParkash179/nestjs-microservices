@@ -16,7 +16,6 @@ export class AuthController {
     @Post('logout/:email')
     @UseGuards(AuthGuard('local'))
     logout(@Param() params: any) {
-        console.log(params);
         return this.authService.logout(params);
     }
 }

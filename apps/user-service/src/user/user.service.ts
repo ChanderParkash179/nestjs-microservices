@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID, USER_STATUS_INVALID } from '../user-service.message';
+import { USER_ID_AND_EMAIL_NOT_MATCHED, USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID, USER_STATUS_INVALID } from '../user-service.message';
 import { Status } from './enums/user.status';
 
 @Injectable()
@@ -72,5 +72,13 @@ export class UserService {
     user.status = status;
 
     await this.userRepository.save(user)
+  }
+
+  async findByIdAndEmail(id: number, email: string) {
+    const user = await this.userRepository.findOne({ where: { id, email } })
+
+    if (!user) throw new UnauthorizedException(USER_ID_AND_EMAIL_NOT_MATCHED);
+
+    return user;
   }
 }

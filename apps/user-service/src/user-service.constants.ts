@@ -4,6 +4,7 @@ import { User } from "./user/entities/user.entity";
 import { ClientProxyFactory, ClientsModule, Transport } from "@nestjs/microservices";
 import { JwtModule } from "@nestjs/jwt";
 import { v4 as uuidv4 } from 'uuid';
+import * as jwt from 'jsonwebtoken';
 
 dotenv.config();
 
@@ -60,3 +61,7 @@ export const JWT_REGISTER_MODULE = JwtModule.register({
         jwtid: UUID
     }
 });
+
+export function decodeToken(token: any): any {
+    return jwt.decode(token);
+}

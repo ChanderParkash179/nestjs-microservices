@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, UnauthorizedException, BadRequestException, Headers } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ClientProxy, ClientProxyFactory, Transport } from '@nestjs/microservices';
-import { CLIENT_PROXY_CREATE, PORT_NUMBER_PRODUCT } from '../user-service.constants';
+import { CLIENT_PROXY_CREATE, PORT_NUMBER_PRODUCT, decodeToken } from '../user-service.constants';
 import { AuthGuard } from '@nestjs/passport';
 import { Status } from './enums/user.status';
 import { USER_INVALID_ACTIVATION_OR_LOGGED_IN } from '../user-service.message';
@@ -45,16 +45,17 @@ export class UserController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Post('/product/:id')
-  async addProduct(@Body() product: any, @Param('id', ParseIntPipe) id: number) {
+  @Post('/product')
+  async addProduct(@Body() product: any, @Headers('authorization') authorization: any) {
+    const { user_id, user_email } = decodeToken(authorization.split(' ')[1])
 
-    const user = await this.userService.findOneById(id);
+    const user = await this.userService.findByIdAndEmail(user_id, user_email);
 
     if (!user) throw new UnauthorizedException();
 
     if (user.status !== Status.ACTIVE) throw new BadRequestException(USER_INVALID_ACTIVATION_OR_LOGGED_IN)
 
-    const payload = { product, id }
+    const payload = { product, user_id }
     return this.client.send({ cmd: "ADD_PRODUCT" }, payload);
   }
 }

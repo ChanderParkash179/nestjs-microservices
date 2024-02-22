@@ -11,27 +11,7 @@ export class ProductController {
   @Post()
   @MessagePattern({ cmd: "ADD_PRODUCT" })
   create(@Body() payload: any) {
-    const { product, id } = payload
-    return this.productService.create(product, Number(id));
-  }
-
-  @Get()
-  findAll() {
-    return this.productService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.productService.findOne(id);
-  }
-
-  @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(id, updateProductDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.productService.remove(id);
+    const { product, user_id } = payload
+    return this.productService.create(product, Number(user_id));
   }
 }
