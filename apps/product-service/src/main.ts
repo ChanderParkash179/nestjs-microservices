@@ -9,6 +9,10 @@ async function bootstrap() {
     ProductServiceModule,
     {
       transport: Transport.TCP,
+      options: {
+        host: '127.0.0.1',
+        port: PORT_NUMBER_PRODUCT
+      }
     },
   );
   product_app.useGlobalPipes(new ValidationPipe())

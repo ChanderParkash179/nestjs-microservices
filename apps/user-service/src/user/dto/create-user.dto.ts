@@ -12,9 +12,6 @@ export class CreateUserDto {
     @IsString()
     password: string;
 
-    @IsString()
-    status: Status;
-
-    @IsString()
-    role: Role;
+    status?: Status;
+    role?: Role;
 }
