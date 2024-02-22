@@ -3,18 +3,9 @@ import { Role } from "../enums/user.role";
 import { Status } from "../enums/user.status";
 
 export class UpdateUserDto {
-    @IsString()
-    name: string;
-
-    @IsEmail()
-    email: string;
-
-    @IsString()
-    password: string;
-
-    @IsString()
-    status: Status;
-
-    @IsString()
-    role: Role;
+    name?: string;
+    email?: string;
+    password?: string;
+    status?: Status;
+    role?: Role;
 }

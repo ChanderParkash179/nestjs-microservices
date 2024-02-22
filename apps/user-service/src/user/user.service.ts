@@ -4,7 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID } from '../user-service.message';
+import { USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID, USER_STATUS_INVALID } from '../user-service.message';
+import { Status } from './enums/user.status';
 
 @Injectable()
 export class UserService {
@@ -59,5 +60,17 @@ export class UserService {
     if (!user) throw new NotFoundException(`${USER_NOT_FOUND_BY_EMAIL} - ${email}`)
 
     return user;
+  }
+
+  async updateStatus(status: Status, email: string) {
+    if (!status && !email) throw new NotFoundException(USER_STATUS_INVALID);
+
+    const user = await this.findByEmail(email);
+
+    if (!user) throw new NotFoundException(USER_NOT_FOUND_BY_EMAIL);
+
+    user.status = status;
+
+    await this.userRepository.save(user)
   }
 }
