@@ -17,4 +17,10 @@ export class ProductController {
     const { id } = payload
     return this.productService.findByUserId(Number(id));
   }
+
+  @EventPattern({ cmd: "FILTER_BY_NAME" })
+  filterByName(payload: any) {
+    const { name } = payload
+    return this.productService.filterByName(name);
+  }
 }

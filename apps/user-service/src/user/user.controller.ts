@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, Headers } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards, Headers, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -23,7 +23,13 @@ export class UserController {
     return this.userService.findProductsByUserId(id);
   }
 
-  @Post()
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/products/filter')
+  async filterProductByName(@Query('name') name: any) {
+    return this.userService.filterByName(name);
+  }
+
+  @Post('/register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }

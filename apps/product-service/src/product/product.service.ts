@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
-import { NO_PRODUCT_AVAILABLE_USER } from '../product-service.message';
+import { NO_PRODUCTS_AVAILABLE_BY_NAME, NO_PRODUCT_AVAILABLE_USER } from '../product-service.message';
 
 @Injectable()
 export class ProductService {
@@ -32,6 +31,14 @@ export class ProductService {
     const products = await this.productRepository.find({ where: { user: id } });
 
     if (!products) throw new NotFoundException(`${NO_PRODUCT_AVAILABLE_USER} - ${id}`);
+
+    return products;
+  }
+
+  async filterByName(name: string): Promise<Product[]> {
+    const products = await this.productRepository.find({ where: { name: Like(`%${name}%`), } });
+
+    if (!products) throw new NotFoundException(`${NO_PRODUCTS_AVAILABLE_BY_NAME} - ${name}`);
 
     return products;
   }

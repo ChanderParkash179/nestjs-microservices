@@ -42,6 +42,11 @@ export class UserService {
     return this.productServiceClient.send({ cmd: "LIST_BY_USERID" }, payload);
   }
 
+  async filterByName(name: string) {
+    const payload = { name };
+    return this.productServiceClient.send({ cmd: "FILTER_BY_NAME" }, payload);
+  }
+  
   // normal service methods
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = this.userRepository.create(createUserDto);
