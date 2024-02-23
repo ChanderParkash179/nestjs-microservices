@@ -46,7 +46,12 @@ export class UserService {
     const payload = { name };
     return this.productServiceClient.send({ cmd: "FILTER_BY_NAME" }, payload);
   }
-  
+
+  async sortingAndPaginationOnProduct(page: number = 1, limit: number = 10, order: string = 'ASC') {
+    const queryParams = { page, limit, order };
+    return this.productServiceClient.send({ cmd: "SORT_AND_PAGINATE" }, queryParams);
+  }
+
   // normal service methods
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = this.userRepository.create(createUserDto);

@@ -5,8 +5,8 @@ export class CreateProductDto {
     @IsString()
     readonly name: string;
 
-    @IsString()
-    readonly price: string;
+    @IsDecimal()
+    readonly price: number;
 
     @IsNumber()
     readonly user: number;

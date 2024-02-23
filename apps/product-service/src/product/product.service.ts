@@ -18,7 +18,7 @@ export class ProductService {
 
     const payload: CreateProductDto = {
       name: request.name,
-      price: request.price,
+      price: Number(request.price),
       user: id
     };
 
@@ -41,5 +41,17 @@ export class ProductService {
     if (!products) throw new NotFoundException(`${NO_PRODUCTS_AVAILABLE_BY_NAME} - ${name}`);
 
     return products;
+  }
+
+  async sortingAndPagination(queryParams: any): Promise<Product[]> {
+    const { page, limit, order } = queryParams;
+
+    (order !== null || order !== '') ? order : 'ASC';
+
+    return this.productRepository.find({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { price: order },
+    });
   }
 }

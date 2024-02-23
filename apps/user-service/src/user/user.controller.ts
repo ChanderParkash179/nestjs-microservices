@@ -29,6 +29,16 @@ export class UserController {
     return this.userService.filterByName(name);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/products/')
+  async sortAndPagination(
+    @Query('page', ParseIntPipe) page: number,
+    @Query('limit', ParseIntPipe) limit: number,
+    @Query('order') order: string
+  ) {
+    return this.userService.sortingAndPaginationOnProduct(page, limit, order)
+  }
+
   @Post('/register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);

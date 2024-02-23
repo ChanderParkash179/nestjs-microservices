@@ -23,4 +23,9 @@ export class ProductController {
     const { name } = payload
     return this.productService.filterByName(name);
   }
+
+  @EventPattern({ cmd: "SORT_AND_PAGINATE" })
+  sortAndPaginate(queryParams: any) {
+    return this.productService.sortingAndPagination(queryParams);
+  }
 }
