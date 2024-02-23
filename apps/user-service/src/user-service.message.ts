@@ -6,3 +6,4 @@ export const USER_STATUS_INVALID = 'Provided Status is invalid!';
 export const USER_LOGGED_OUT = 'User Logged out Successfully!';
 export const USER_INVALID_ACTIVATION_OR_LOGGED_IN = 'User is UN-ACTIVE';
 export const USER_ID_AND_EMAIL_NOT_MATCHED = 'Requested User ID & Email doesn\'t matched!';
+export const USER_ENOUGH_PRIVILEGE_TODO = 'Request User don\'t have enough privilege to do this request'

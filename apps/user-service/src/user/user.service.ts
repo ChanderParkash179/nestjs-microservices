@@ -4,10 +4,11 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { USER_ID_AND_EMAIL_NOT_MATCHED, USER_INVALID_ACTIVATION_OR_LOGGED_IN, USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID, USER_STATUS_INVALID } from '../user-service.message';
+import { USER_ENOUGH_PRIVILEGE_TODO, USER_ID_AND_EMAIL_NOT_MATCHED, USER_INVALID_ACTIVATION_OR_LOGGED_IN, USER_NOT_FOUND_BY_EMAIL, USER_NOT_FOUND_BY_ID, USER_STATUS_INVALID } from '../user-service.message';
 import { Status } from './enums/user.status';
 import { decodeToken } from '../user-service.constants';
 import { ClientProxy } from '@nestjs/microservices';
+import { Role } from './enums/user.role';
 
 @Injectable()
 export class UserService {
@@ -58,7 +59,18 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(authorization: any): Promise<User[]> {
+
+    const { user_id, user_email, user_role } = decodeToken(authorization.split(' ')[1])
+
+    const user = await this.findByIdAndEmail(user_id, user_email);
+
+    if (!user) throw new UnauthorizedException();
+
+    if ((user_role !== Role.ADMIN) && (user.role !== Role.ADMIN)) throw new UnauthorizedException(USER_ENOUGH_PRIVILEGE_TODO);
+
+    if (user.status !== Status.ACTIVE) throw new BadRequestException(USER_INVALID_ACTIVATION_OR_LOGGED_IN)
+
     return this.userRepository.find();
   }
 

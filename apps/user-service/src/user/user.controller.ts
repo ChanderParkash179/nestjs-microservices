@@ -45,8 +45,9 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  @UseGuards(AuthGuard('jwt'))
+  findAll(@Headers('authorization') authorization: any) {
+    return this.userService.findAll(authorization);
   }
 
   @Get(':id')
