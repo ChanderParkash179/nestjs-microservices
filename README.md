@@ -55,7 +55,7 @@
 * ## Tasks
 
 1. User should be able to register (Email, Password):
-    - Endpoint:  `https://localhost:3001/user/register`
+    - Endpoint:  `https://localhost:8001/user/register`
     - Method: `POST`
     - Authorization: `[NOT REQUIRED]`
     - NOTE: By Default Role is `NORMAL`, if you want to register as `ADMIN` if you want to register `ADMIN` user.
@@ -70,7 +70,7 @@
      ```
 
 2. User should be able to login (Email, Password):
-    - Endpoint: `https://localhost:3001/user/login`
+    - Endpoint: `https://localhost:8001/user/login`
     - Method: `POST`
     - Authorization: `[NOT REQUIRED]`
     - Payload:
@@ -82,19 +82,19 @@
      ```
 
 3. User should be able to get a list of products by pages and sort them based on the price:
-    - Endpoint: `http://localhost:3001/user/products?page=2&limit=10&   order=DESC`
+    - Endpoint: `http://localhost:8001/user/products?page=2&limit=10&   order=DESC`
     - Method: `POST`
     - Authorization: Required using Login Token
     - Payload: `[NOT REQUIRED]`
     
 4. User should be able to filter products by name:
-    - Endpoint: `http://localhost:3001/user/products/filter?name=milk`
+    - Endpoint: `http://localhost:8001/user/products/filter?name=milk`
     - Method: `POST`
     - Authorization: Required using Login Token
     - Payload: `[NOT REQUIRED]`
 
 5. User should be able to add a product:
-    - Endpoint: `http://localhost:3001/user/product`
+    - Endpoint: `http://localhost:8001/user/product`
     - Method: `POST`
     - Authorization: Required using Login Token
     - Payload:
@@ -106,14 +106,14 @@
      ```
 
 6. User should be able to see the product that he added:
-    - Endpoint: `http://localhost:3001/user/products/:id`
+    - Endpoint: `http://localhost:8001/user/products/:id`
     - Method: `GET`
     - Params: ID of the user
     - Authorization: Required using Login Token
     - Payload: `[NOT REQUIRED]`
 
 7. An admin should be able to get a list of users:
-    - Endpoint: `http://localhost:3001/user`
+    - Endpoint: `http://localhost:8001/user`
     - Method: `GET`
     - Authorization: Required using Login Token with role `ADMIN`
     - Payload: `[NOT REQUIRED]`
