@@ -5,6 +5,9 @@
 
 ---
 
+* ## NOTE if you're checking commit messages:
+    * I used commit message `prefix` as <span style="color:yellow;"> [NM-${COMMIT_NUMBER}] </span> in this pattern `NM` abbrivation stands for Nest.js Microservice & `COMMIT_NUMBER` denotes the current number of commit except `init commit` which is initial commit, I followed this production based practice to keep a track of `Major` & `Minor` releases or projects.
+
 * ## Steps to Get Started
 
 1. #### Clone the repository:
