@@ -11,7 +11,9 @@
 * ## Steps to Get Started
 
 1. #### Clone the repository:
-    > git clone https://github.com/ChanderParkash179/nestjs-microservices.git
+    > * open terminal and type 
+    > * git clone https://github.com/ChanderParkash179/nestjs-microservices.git
+    > * Now enter `cd nestjs-microservices`
 
 2. #### Open the project in your preferred coding editor like VSCode, IntelliJ IDEA, etc.
 
@@ -82,7 +84,7 @@
      ```
 
 3. User should be able to get a list of products by pages and sort them based on the price:
-    - Endpoint: `http://localhost:8001/user/products?page=2&limit=10&   order=DESC`
+    - Endpoint: `http://localhost:8001/user/products?page=2&limit=10&order=DESC`
     - Method: `POST`
     - Authorization: Required using Login Token
     - Payload: `[NOT REQUIRED]`
