@@ -18,7 +18,7 @@ export class ProductService {
 
     const payload: CreateProductDto = {
       name: request.name,
-      price: Number(request.price),
+      price: request.price,
       user: id
     };
 

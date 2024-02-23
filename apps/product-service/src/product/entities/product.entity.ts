@@ -10,7 +10,7 @@ export class Product {
     name: string;
 
     @Column({ nullable: false })
-    price: number;
+    price: string;
 
     @Column({ nullable: false })
     user: number;

@@ -39,7 +39,8 @@ export class AuthService {
 
     async logout(params: string) {
         const email = params['email'];
-
+        console.log(email);
+        console.log(params);
         const user = await this.userService.findByEmail(email);
 
         if (!user) throw new NotFoundException(`${USER_NOT_FOUND_BY_EMAIL} - ${email}`);

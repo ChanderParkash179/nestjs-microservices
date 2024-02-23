@@ -4,8 +4,8 @@ import { Product } from "./product/entities/product.entity";
 
 dotenv.config();
 
-export const PORT_NUMBER_USER = 3001;
-export const PORT_NUMBER_PRODUCT = 3002;
+export const PORT_NUMBER_PRODUCT = 8002;
+export const PORT_NUMBER_USER = 8001;
 
 export const TYPEORM_FEATURE_PRODUCT = TypeOrmModule.forFeature([Product]);
 
